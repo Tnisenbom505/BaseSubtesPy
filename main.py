@@ -10,7 +10,7 @@ import datetime
 def conectar_db():
     try:
         conn = mysql.connector.connect(
-            host="181.47.29.35",
+            host="10.1.5.205",
             user="2024-4INF-Grupo13",
             password="NitrogenoErbioItrio",
             database="2024-4INF-Grupo13"
@@ -124,7 +124,8 @@ def mostrar_seleccion():
         if station_info:
             try:
                 fecha = datetime.datetime.strptime(selected_date, "%d/%m/%y").date()
-                fecha_str = fecha.strftime("%Y-%m-%d")
+                fecha_str = fecha.strftime("%Y-%d-%m")
+                print(fecha_str)
             except ValueError as e:
                 messagebox.showerror("Error", "La fecha seleccionada no es válida.")
                 return
@@ -134,7 +135,7 @@ def mostrar_seleccion():
             SELECT Estaciones.nombre, 
                    Estaciones.linea, 
                    PasajerosPorEstacion.fecha, 
-                   AVG(PasajerosPorEstacion.cantidad) AS promedio_pasajeros
+                   SUM(PasajerosPorEstacion.cantidad) AS promedio_pasajeros
             FROM Estaciones
             INNER JOIN PasajerosPorEstacion 
                 ON Estaciones.nombre = PasajerosPorEstacion.estacion
@@ -149,7 +150,7 @@ def mostrar_seleccion():
                 result = cursor.fetchone()
                 if result:
                     promedio_pasajeros = result[3]  # Obtener el promedio de pasajeros
-                    messagebox.showinfo("Promedio de Pasajeros", f"El promedio de pasajeros es: {promedio_pasajeros:.2f}")
+                    messagebox.showinfo("La suma de Pasajeros", f"La suma de pasajeros es: {promedio_pasajeros:.2f}")
                 else:
                     messagebox.showwarning("No encontrado", "No se encontraron datos para la estación y fecha seleccionada.")
             except mysql.connector.Error as err:
