@@ -160,11 +160,19 @@ def mostrar_seleccion():
     else:
         messagebox.showwarning("Campos incompletos", "Por favor, completa todos los campos.")
 
+
+
+Label_funciones = Label(root, text="Selecciona una funcion:", font=("Arial", 10))
+Label_funciones.grid(row=3, column=0, padx=20, pady=10, sticky="w")
 # Botón para mostrar la información
-button_show = Button(root, text="Mostrar Promedio", command=mostrar_seleccion)
-button_show.grid(row=3, column=0, columnspan=3, pady=20)
+button_show = Button(root, text="Mostrar suma", command=mostrar_seleccion)
+button_show.grid(row=3, column=0, columnspan=4, pady=10)
 
+button_show = Button(root, text="Eliminar registro", command=mostrar_seleccion)
+button_show.grid(row=3, column=1, columnspan=3, pady=10)
 
+button_show = Button(root, text="Modificar registro", command=mostrar_seleccion)
+button_show.grid(row=3, column=2, columnspan=3, pady=10)
 
 # Iniciar la interfaz gráfica
 root.mainloop()
